@@ -14,7 +14,7 @@ import autograd.nodes
 
 class Adam(autograd.nodes.Optimizer):
 
-    def __init__(self, alpha=0.001, beta_one=0.9, beta_two=0.999, epsilon=1e-8):
+    def __init__(self, alpha=0.0001, beta_one=0.9, beta_two=0.999, epsilon=1e-8):
         """Creates an ADAM optimizer."""
         super(Adam, self).__init__("adam")
         self.t = 0

@@ -8,7 +8,7 @@ import autograd.nodes
 import autograd.optim
 from autograd.ops.core import mean, add, subtract, multiply, divide
 from autograd.ops.matrix import matmul, broadcast, conv2d
-from autograd.ops.functional import sigmoid, tanh, relu
+from autograd.ops.functional import sigmoid, tanh, relu, sigmoid_cross_entropy, sigmoid_classifier
 
 
 ###############
