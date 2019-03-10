@@ -50,6 +50,22 @@ def broadcast(x, axis):
     return operation
 
 
+class SquaredTwoNorm(autograd.nodes.Operation):
+
+    def __init__(self, weight):
+        """Creates a graph node in a dynamic comptational graph."""
+        forward_function = lambda x: weight * np.sum(np.square(x))
+        backward_function = lambda g, x: [2.0 * weight * g * x]
+        super(SquaredTwoNorm, self).__init__("squared_two_norm", forward_function, backward_function)
+
+
+def squared_two_norm(x, weight):
+    """Computes the two norm of a tensor."""
+    operation = SquaredTwoNorm(weight)
+    operation.resolve(x)
+    return operation
+
+
 def bytes_offset_backend(x):
     """Get offset of array data from base data in bytes."""
     return (0 if x.base is None else 

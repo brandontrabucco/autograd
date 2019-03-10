@@ -36,8 +36,8 @@ if __name__ == "__main__":
     training_labels = autograd.utils.constant(training_labels[:VAL_SIZE, :])
 
     # Create the neural network
-    layer1 = autograd.layers.Dense(12, 1024, activation=autograd.utils.tanh)
-    layer2 = autograd.layers.Dense(1024, 1)
+    layer1 = autograd.layers.Dense(12, 4, activation=autograd.utils.tanh)
+    layer2 = autograd.layers.Dense(4, 1)
 
     def get_val_accuracy(threshold):
         """Get the accuracy of the curent model."""
@@ -57,6 +57,8 @@ if __name__ == "__main__":
 
         # Compute the loss and backpropagate
         loss = autograd.utils.sigmoid_cross_entropy(training_labels, x)
+        penalty = autograd.utils.weight_decay(loss, 0.001)
+        loss = autograd.utils.add(loss, penalty)
         autograd.utils.backpropagate(loss)
 
         max_threshold = 0.5
